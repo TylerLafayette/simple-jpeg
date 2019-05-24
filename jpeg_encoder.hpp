@@ -11,18 +11,19 @@ private:
     unsigned int height;
     unsigned int arraySize;
     unsigned int chunks;
-    int coordinateToIndex(int x, int y);
+    int coordinateToIndex(int x, int y, int width, int scale);
     double calculateY(int r, int g, int b);
     double calculateCb(int r, int g, int b);
     double calculateCr(int r, int g, int b);
     std::vector<int> genChunk(int x, int y);
     std::vector< std::vector<int> > chunkify();
-    void dctChunk(std::vector<int> chunk);
+    std::vector<int> chunkToLuminance(std::vector<int> chunk);
+    std::vector<float> dctChunk(std::vector<int> chunk);
     int* pixels;
 public:
     JPEGEncoder(char* file);
     void LoadImageIntoYCbCr();
-    void RunDCT(int index);
+    void RunDCT();
 };
 
 #endif  // JPEG_ENCODER_H
